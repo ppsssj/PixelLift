@@ -61,11 +61,20 @@ function Hero({
                       className="workspace-history-item"
                       onClick={() => onSelectHistoryItem(item)}
                     >
-                      <strong>{item.sourceName}</strong>
-                      <span>{item.model_name}</span>
-                      <small>
-                        {item.createdAt} · {item.outscale}x
-                      </small>
+                      <span className="workspace-history-thumb">
+                        {item.result_url ? (
+                          <img src={item.result_url} alt="" className="workspace-history-thumb-image" />
+                        ) : (
+                          <span className="workspace-history-thumb-fallback">IMG</span>
+                        )}
+                      </span>
+                      <span className="workspace-history-copy">
+                        <strong>{item.sourceName}</strong>
+                        <span>{item.model_name}</span>
+                        <small>
+                          {item.createdAt} · {item.outscale}x
+                        </small>
+                      </span>
                     </button>
                   ))}
                 </div>
