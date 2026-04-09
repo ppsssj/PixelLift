@@ -1,7 +1,7 @@
 # pixellift
 
 `pixellift`는 로컬 `Real-ESRGAN` 모델을 웹 UI로 감싸서 이미지 업스케일링을 더 쉽게 사용할 수 있게 만든 프로젝트입니다.  
-인트로 페이지에서 모델 설명을 확인한 뒤 작업 공간으로 진입할 수 있고, 업로드부터 결과 미리보기와 다운로드까지 한 화면에서 진행할 수 있습니다.
+인트로 페이지에서 모델 설명을 확인한 뒤 작업 공간으로 진입할 수 있고, 업로드부터 결과 미리보기, 다운로드까지 한 화면에서 진행할 수 있습니다.
 
 ## 화면 미리보기
 
@@ -13,6 +13,39 @@
 
 ![pixellift workspace](./docs/screenshots/workspace-page.png)
 
+## 입력 / 출력 예시
+
+<table>
+  <thead>
+    <tr>
+      <th>예시</th>
+      <th>사용 모델</th>
+      <th>입력</th>
+      <th>출력</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>예시 1</td>
+      <td><code>General x4 v3</code></td>
+      <td><img src="./docs/examples/example-1-input.jpg" alt="example 1 input" width="220" /></td>
+      <td><img src="./docs/examples/example-1-output.jpg" alt="example 1 output" width="220" /></td>
+    </tr>
+    <tr>
+      <td>예시 2</td>
+      <td><code>General x4 v3</code></td>
+      <td><img src="./docs/examples/example-2-input.jpg" alt="example 2 input" width="220" /></td>
+      <td><img src="./docs/examples/example-2-output.jpg" alt="example 2 output" width="220" /></td>
+    </tr>
+    <tr>
+      <td>예시 3</td>
+      <td><code>Anime x4 6B</code></td>
+      <td><img src="./docs/examples/example-3-input.png" alt="example 3 input" width="220" /></td>
+      <td><img src="./docs/examples/example-3-output.png" alt="example 3 output" width="220" /></td>
+    </tr>
+  </tbody>
+</table>
+
 ## 주요 기능
 
 - `Real-ESRGAN` 기반 이미지 업스케일링
@@ -20,6 +53,7 @@
 - 이미지 클릭 업로드 및 드래그 앤 드롭
 - 업스케일 결과 미리보기와 다운로드
 - 작업 이력 확인
+- 추론 중 로딩 상태 표시
 - 기본 모델 `realesr-general-x4v3` 적용
 - FastAPI 백엔드 + React 프론트엔드 구성
 
@@ -41,6 +75,7 @@ ESRGANP/
 │  ├─ weights/
 │  └─ ...
 └─ docs/
+   ├─ examples/
    └─ screenshots/
 ```
 
