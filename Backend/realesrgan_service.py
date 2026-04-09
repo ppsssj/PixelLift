@@ -33,6 +33,15 @@ class ModelSpec:
 
 
 MODEL_SPECS: dict[str, ModelSpec] = {
+    "realesr-general-x4v3": ModelSpec(
+        display_name="General x4 v3",
+        netscale=4,
+        family="srvgg_general",
+        urls=(
+            "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-wdn-x4v3.pth",
+            "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth",
+        ),
+    ),
     "RealESRGAN_x4plus": ModelSpec(
         display_name="General x4 Plus",
         netscale=4,
@@ -62,15 +71,6 @@ MODEL_SPECS: dict[str, ModelSpec] = {
         netscale=4,
         family="srvgg_video",
         urls=("https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-animevideov3.pth",),
-    ),
-    "realesr-general-x4v3": ModelSpec(
-        display_name="General x4 v3",
-        netscale=4,
-        family="srvgg_general",
-        urls=(
-            "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-wdn-x4v3.pth",
-            "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth",
-        ),
     ),
 }
 

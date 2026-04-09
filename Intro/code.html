@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>pixellift | Precision Upscaling</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#d9e3f6",
+                    "surface-variant": "#e1e3e4",
+                    "primary-container": "#323c4b",
+                    "inverse-on-surface": "#f0f1f2",
+                    "inverse-surface": "#2e3132",
+                    "inverse-primary": "#bdc7d9",
+                    "surface-container-high": "#e7e8e9",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "tertiary": "#3b3b3b",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-bright": "#f8f9fa",
+                    "tertiary-fixed": "#5e5e5e",
+                    "outline": "#777777",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d9dadb",
+                    "secondary": "#5e5e5e",
+                    "on-primary-fixed": "#ffffff",
+                    "surface": "#f8f9fa",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#3b3b3b",
+                    "on-tertiary-fixed": "#ffffff",
+                    "on-surface-variant": "#474747",
+                    "surface-container": "#edeeef",
+                    "primary": "#000000",
+                    "on-secondary-container": "#1b1b1b",
+                    "on-error-container": "#410002",
+                    "primary-fixed-dim": "#3d4756",
+                    "on-primary": "#d9e3f6",
+                    "on-surface": "#191c1d",
+                    "outline-variant": "#c6c6c6",
+                    "surface-container-highest": "#e1e3e4",
+                    "secondary-fixed-dim": "#ababab",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#d4d4d4",
+                    "secondary-fixed": "#c6c6c6",
+                    "primary-fixed": "#555f6f",
+                    "on-primary-container": "#ffffff",
+                    "tertiary-container": "#747474",
+                    "on-tertiary": "#e2e2e2",
+                    "tertiary-fixed-dim": "#474747",
+                    "on-tertiary-fixed-variant": "#e2e2e2",
+                    "background": "#f8f9fa",
+                    "surface-tint": "#555f6f",
+                    "error": "#ba1a1a",
+                    "on-background": "#191c1d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+        }
+        .editorial-shadow {
+            box-shadow: 0 40px 60px -5px rgba(25, 28, 29, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-on-primary-fixed-variant selection:text-primary">
+<!-- TopNavBar -->
+<nav class="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md w-full sticky top-0 z-50 border-b border-neutral-200/20 dark:border-neutral-800/20">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between font-['Manrope'] tracking-tight">
+<div class="text-xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50">pixellift</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-neutral-900 dark:text-white font-semibold border-b-2 border-neutral-900 dark:border-white pb-1 transition-opacity hover:opacity-80" href="#">Gallery</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors" href="#">Models</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors" href="#">Pricing</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors" href="#">Docs</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-neutral-500 hover:text-neutral-900 transition-colors px-4 py-2">Sign In</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-md font-bold hover:opacity-80 transition-opacity active:scale-95 duration-150">Get Started</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="hero-gradient pt-24 pb-32 px-6">
+<div class="max-w-7xl mx-auto text-center">
+<span class="inline-block bg-surface-container-high px-4 py-1 text-xs font-bold tracking-widest uppercase mb-8 rounded-full">Precision Upscaling Engine</span>
+<h1 class="font-headline text-7xl md:text-9xl font-extrabold tracking-tighter text-on-background mb-6 leading-none">
+                    pixellift
+                </h1>
+<p class="font-headline text-2xl md:text-4xl font-bold tracking-tight text-on-surface-variant mb-4">
+                    Local Real-ESRGAN Image Upscaling
+                </p>
+<p class="max-w-2xl mx-auto text-on-surface-variant text-lg md:text-xl font-body leading-relaxed mb-12">
+                    Professional-grade visual enhancement, processed directly on your local hardware. High-fidelity upscaling without the cloud privacy trade-offs.
+                </p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-4">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-md font-bold text-lg hover:opacity-90 transition-all active:scale-95 flex items-center gap-3">
+                        Start Workspace
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="px-10 py-4 rounded-md border border-outline-variant/30 font-bold text-lg hover:bg-surface-container-low transition-all">
+                        Documentation
+                    </button>
+</div>
+</div>
+</section>
+<!-- Notice Banner -->
+<section class="max-w-7xl mx-auto px-6 -mt-12">
+<div class="bg-surface-container-highest border border-outline-variant/10 p-4 md:p-6 flex flex-col md:flex-row items-center justify-center gap-4 editorial-shadow rounded-xl">
+<span class="material-symbols-outlined text-secondary" data-icon="info">info</span>
+<p class="text-sm font-medium text-on-surface tracking-tight">
+<span class="font-bold">Recommended:</span> Start with lighter models for better performance on local PCs without high-end dedicated GPUs.
+                </p>
+</div>
+</section>
+<!-- Models Grid -->
+<section class="max-w-7xl mx-auto px-6 py-32">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-xl">
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tighter mb-4">Supported Models</h2>
+<p class="text-on-surface-variant font-body">Leverage state-of-the-art neural networks tailored for diverse visual contents.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-high rounded text-xs font-bold uppercase tracking-widest text-on-surface-variant">Architecture: Real-ESRGAN</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Model 1: Featured -->
+<div class="group bg-surface-container-lowest p-8 border-2 border-primary editorial-shadow relative overflow-hidden transition-all hover:-translate-y-1">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="auto_awesome_motion">auto_awesome_motion</span>
+<span class="bg-primary text-on-primary px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-sm">Featured</span>
+</div>
+<h3 class="font-headline text-xl font-extrabold tracking-tight mb-2">realesr-general-x4v3</h3>
+<p class="text-xs font-bold text-secondary mb-4 uppercase tracking-tighter">Versatile and fast</p>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">The default recommendation for most workflows. High speed with impressive clarity across various image types.</p>
+<button class="w-full text-left font-bold text-sm flex items-center justify-between border-t border-outline-variant/20 pt-4 group-hover:text-primary transition-colors">
+                        Select Model
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Model 2 -->
+<div class="group bg-surface-container-lowest p-8 border border-outline-variant/20 transition-all hover:border-primary/40 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-neutral-400 group-hover:text-primary transition-colors" data-icon="high_quality">high_quality</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-sm">General</span>
+</div>
+<h3 class="font-headline text-xl font-extrabold tracking-tight mb-2">RealESRGAN_x4plus</h3>
+<p class="text-xs font-bold text-secondary mb-4 uppercase tracking-tighter">High precision for general images</p>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Advanced architectural depth designed to handle high-resolution upscaling for photorealistic content.</p>
+<button class="w-full text-left font-bold text-sm flex items-center justify-between border-t border-outline-variant/20 pt-4 group-hover:text-primary transition-colors">
+                        Select Model
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Model 3 -->
+<div class="group bg-surface-container-lowest p-8 border border-outline-variant/20 transition-all hover:border-primary/40 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-neutral-400 group-hover:text-primary transition-colors" data-icon="camera">camera</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-sm">Detail</span>
+</div>
+<h3 class="font-headline text-xl font-extrabold tracking-tight mb-2">RealESRNet_x4plus</h3>
+<p class="text-xs font-bold text-secondary mb-4 uppercase tracking-tighter">Optimized for natural details</p>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Focuses on structural integrity and natural texture preservation for organic subjects and landscapes.</p>
+<button class="w-full text-left font-bold text-sm flex items-center justify-between border-t border-outline-variant/20 pt-4 group-hover:text-primary transition-colors">
+                        Select Model
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Model 4 -->
+<div class="group bg-surface-container-lowest p-8 border border-outline-variant/20 transition-all hover:border-primary/40 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-neutral-400 group-hover:text-primary transition-colors" data-icon="brush">brush</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-sm">Anime</span>
+</div>
+<h3 class="font-headline text-xl font-extrabold tracking-tight mb-2">RealESRGAN_x4plus_anime_6B</h3>
+<p class="text-xs font-bold text-secondary mb-4 uppercase tracking-tighter">Best for high-quality anime art</p>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Custom weights trained specifically to handle sharp lines and vibrant flat colors inherent in digital illustrations.</p>
+<button class="w-full text-left font-bold text-sm flex items-center justify-between border-t border-outline-variant/20 pt-4 group-hover:text-primary transition-colors">
+                        Select Model
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Model 5 -->
+<div class="group bg-surface-container-lowest p-8 border border-outline-variant/20 transition-all hover:border-primary/40 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-neutral-400 group-hover:text-primary transition-colors" data-icon="balance">balance</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-sm">Balanced</span>
+</div>
+<h3 class="font-headline text-xl font-extrabold tracking-tight mb-2">RealESRGAN_x2plus</h3>
+<p class="text-xs font-bold text-secondary mb-4 uppercase tracking-tighter">Balanced 2x upscaling</p>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Perfect for moderate enhancements where maintaining performance is as critical as visual fidelity.</p>
+<button class="w-full text-left font-bold text-sm flex items-center justify-between border-t border-outline-variant/20 pt-4 group-hover:text-primary transition-colors">
+                        Select Model
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Model 6 -->
+<div class="group bg-surface-container-lowest p-8 border border-outline-variant/20 transition-all hover:border-primary/40 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-neutral-400 group-hover:text-primary transition-colors" data-icon="movie">movie</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-sm">Video</span>
+</div>
+<h3 class="font-headline text-xl font-extrabold tracking-tight mb-2">realesr-animevideov3</h3>
+<p class="text-xs font-bold text-secondary mb-4 uppercase tracking-tighter">Optimized for anime video frames</p>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Temporal-aware upscaling logic designed to reduce flickering and artifacts in sequential animation frames.</p>
+<button class="w-full text-left font-bold text-sm flex items-center justify-between border-t border-outline-variant/20 pt-4 group-hover:text-primary transition-colors">
+                        Select Model
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Bento Showcase Area -->
+<section class="bg-surface-container-low py-32">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-8 h-[600px] relative overflow-hidden rounded-xl bg-white editorial-shadow group">
+<img alt="Starry Night Upscaling" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="dramatic wide angle shot of a clear starry night sky over a dark landscape with sharp detail and deep blacks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJhcf7nQku29HwnVgTzPx6nJvfKScZqsQ-oW5Bxg03wWx9kezXC_VIpQ_agsABmrfEFy7CzkkHf3S7SXBV97TrjTAdM5kGmndOAsQnUzzssSQcsy2fe-DXjwJXAQ94lifLs-QOLMya6VrORew3wJ0A82VxULxkwNPVLocuLAenhkB_t-DtLH7v87tG5XPpFdXwgHAoo-dIMDgn6Y5fFk3XOG6epLkr_2bvdT37RL-kZP2XFq7HhPRbrO2bkcasZ3PK8FdgKZL4Yqck"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-10 left-10 text-white">
+<h3 class="font-headline text-3xl font-extrabold tracking-tight mb-2">Zero Artifacts</h3>
+<p class="text-white/80 max-w-sm">Local processing ensures the highest bit-depth preservation during the enhancement cycle.</p>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 grid grid-rows-2 gap-8">
+<div class="bg-white p-10 rounded-xl editorial-shadow flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="lock">lock</span>
+<div>
+<h4 class="font-headline text-xl font-extrabold mb-2">Privacy First</h4>
+<p class="text-on-surface-variant text-sm">Your data never leaves your machine. Local execution means total control over your assets.</p>
+</div>
+</div>
+<div class="bg-primary text-on-primary p-10 rounded-xl editorial-shadow flex flex-col justify-between">
+<span class="material-symbols-outlined text-on-primary text-5xl" data-icon="bolt">bolt</span>
+<div>
+<h4 class="font-headline text-xl font-extrabold mb-2">Real-time Preview</h4>
+<p class="text-on-primary-fixed-variant text-sm">Hardware-accelerated rendering provides instantaneous feedback on parameter adjustments.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-neutral-900 w-full py-12 border-t border-neutral-100 dark:border-neutral-800">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 font-['Inter'] text-xs text-neutral-500">
+<div class="font-bold text-neutral-900 dark:text-white">pixellift</div>
+<div class="text-center md:text-left">
+                © 2024 Pixellift AI. Precision Upscaling.
+            </div>
+<div class="flex gap-6">
+<a class="hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors" href="#">Terms</a>
+<a class="hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors underline" href="#">Privacy</a>
+<a class="hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors" href="#">Twitter</a>
+<a class="hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>

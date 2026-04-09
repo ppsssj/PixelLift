@@ -21,16 +21,19 @@ venv/
 env/
 ENV/
 Real-ESRGAN/.venv/
+Frontend/node_modules/
 
 # Build artifacts
 build/
 dist/
 *.egg-info/
 Real-ESRGAN/.eggs/
+Frontend/dist/
 
 # Runtime outputs
 Backend/runtime/
 Real-ESRGAN/results/
+Real-ESRGAN/test-results/
 
 # Model weights and large binaries
 Real-ESRGAN/weights/*.pth

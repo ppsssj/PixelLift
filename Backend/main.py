@@ -7,6 +7,7 @@ import mimetypes
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.responses import PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -16,6 +17,8 @@ from realesrgan_service import RealESRGANService
 APP_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = APP_DIR.parent
 FRONTEND_DIR = PROJECT_DIR / "Frontend"
+FRONTEND_DIST_DIR = FRONTEND_DIR / "dist"
+FRONTEND_ASSETS_DIR = FRONTEND_DIST_DIR / "assets"
 RUNTIME_DIR = APP_DIR / "runtime"
 UPLOAD_DIR = RUNTIME_DIR / "uploads"
 RESULT_DIR = RUNTIME_DIR / "results"
@@ -46,7 +49,8 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 RESULT_DIR.mkdir(parents=True, exist_ok=True)
 
 app.mount("/generated", StaticFiles(directory=str(RESULT_DIR)), name="generated")
-app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIR)), name="assets")
+if FRONTEND_ASSETS_DIR.exists():
+    app.mount("/assets", StaticFiles(directory=str(FRONTEND_ASSETS_DIR)), name="assets")
 
 
 @app.get("/api/health")
@@ -62,7 +66,7 @@ def get_models() -> dict[str, list[dict[str, object]]]:
 @app.post("/api/upscale", response_model=UpscaleResponse)
 async def upscale(
     file: UploadFile = File(...),
-    model_name: str = Form("RealESRGAN_x4plus"),
+    model_name: str = Form("realesr-general-x4v3"),
     outscale: float = Form(4.0),
     tile: int = Form(0),
     denoise_strength: float = Form(0.5),
@@ -113,5 +117,10 @@ async def upscale(
 
 
 @app.get("/")
-def index() -> FileResponse:
-    return FileResponse(FRONTEND_DIR / "index.html")
+def index():
+    if not FRONTEND_DIST_DIR.exists():
+        return PlainTextResponse(
+            "Frontend build not found. Run `npm install` and `npm run build` in the Frontend directory.",
+            status_code=503,
+        )
+    return FileResponse(FRONTEND_DIST_DIR / "index.html")
