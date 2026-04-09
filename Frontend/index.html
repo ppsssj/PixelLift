@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pixellift</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script type="module" src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">Local model serving</p>
+        <h1>pixellift</h1>
+        <p class="hero-copy">
+          Upload a low-resolution image, choose a model, and preview the upscaled result from your local
+          Real-ESRGAN setup.
+        </p>
+      </header>
+
+      <main class="workspace">
+        <section class="panel form-panel">
+          <form id="upscale-form">
+            <label class="field file-field">
+              <span>Image</span>
+              <input id="image-input" name="file" type="file" accept="image/*" required />
+            </label>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Model</span>
+                <select id="model-select" name="model_name"></select>
+              </label>
+
+              <label class="field">
+                <span>Outscale</span>
+                <input id="outscale-input" name="outscale" type="number" min="1" max="8" step="0.5" value="4" />
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Tile</span>
+                <input id="tile-input" name="tile" type="number" min="0" step="32" value="0" />
+              </label>
+
+              <label class="field">
+                <span>Denoise</span>
+                <input
+                  id="denoise-input"
+                  name="denoise_strength"
+                  type="number"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  value="0.5"
+                />
+              </label>
+            </div>
+
+            <label class="checkbox-row">
+              <input id="fp32-input" name="fp32" type="checkbox" />
+              <span>Use FP32 precision</span>
+            </label>
+
+            <button id="submit-button" type="submit">Upscale Image</button>
+          </form>
+
+          <div id="status-box" class="status-box" aria-live="polite">
+            Waiting for an image.
+          </div>
+        </section>
+
+        <section class="panel preview-panel">
+          <div class="preview-card">
+            <p class="preview-label">Original</p>
+            <img id="original-preview" alt="Original preview" />
+          </div>
+
+          <div class="preview-card">
+            <div class="preview-head">
+              <p class="preview-label">Upscaled</p>
+              <a id="download-link" class="download-link" hidden>Download</a>
+            </div>
+            <img id="result-preview" alt="Upscaled preview" />
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
