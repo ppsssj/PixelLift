@@ -193,7 +193,7 @@ function IntroScreen({ isReady, models, onStart, status }) {
         <div className="intro-topbar-inner">
           <div className="brand-lockup brand-lockup-intro">
             <img src={logoMark} alt="" className="brand-mark" />
-            <strong>pixellift</strong>
+            <strong>PixelLift</strong>
           </div>
           <nav>
             <a href="#intro-models">모델</a>
@@ -214,10 +214,10 @@ function IntroScreen({ isReady, models, onStart, status }) {
         <section className="intro-hero">
           <div className="intro-hero-copy">
             <span className="intro-kicker">LOCAL UPSCALING WORKSPACE</span>
-            <h1>pixellift</h1>
+            <h1>PixelLift</h1>
             <p className="intro-subtitle">로컬 Real-ESRGAN 이미지 업스케일링</p>
             <p className="intro-copy">
-              pixellift는 로컬 하드웨어에서 직접 이미지를 업스케일링할 수 있도록 정리한 작업 공간입니다.
+              PixelLift는 로컬 하드웨어에서 직접 이미지를 업스케일링할 수 있도록 정리한 작업 공간입니다.
               먼저 모델별 특성을 확인하고, 현재 PC 환경에 맞는 설정으로 자연스럽게 작업 화면으로 넘어갈 수 있습니다.
             </p>
             <div className="intro-actions">
@@ -334,7 +334,7 @@ function IntroScreen({ isReady, models, onStart, status }) {
         </section>
 
         <footer className="intro-footer">
-          <strong>pixellift</strong>
+          <strong>PixelLift</strong>
           <p>© 2026 Pixellift AI. Precision Upscaling.</p>
           <div>
             <a href="#intro-models">모델</a>

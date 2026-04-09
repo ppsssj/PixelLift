@@ -37,7 +37,7 @@ function Hero({
         <button type="button" className="workspace-home-button" onClick={onGoHome}>
           <span className="brand-lockup">
             <img src={logoMark} alt="" className="brand-mark" />
-            <strong>PIXELLIFT</strong>
+            <strong>PixelLift</strong>
           </span>
         </button>
         <nav className="workspace-nav" ref={historyRef}>
