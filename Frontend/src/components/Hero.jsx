@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import logoMark from "../assets/pixellift-logo.svg";
 
 function Hero({
   downloadDisabled,
@@ -34,7 +35,10 @@ function Hero({
     <header className="workspace-header">
       <div className="workspace-brand">
         <button type="button" className="workspace-home-button" onClick={onGoHome}>
-          <strong>PIXELLIFT</strong>
+          <span className="brand-lockup">
+            <img src={logoMark} alt="" className="brand-mark" />
+            <strong>PIXELLIFT</strong>
+          </span>
         </button>
         <nav className="workspace-nav" ref={historyRef}>
           <button type="button" className={`workspace-nav-button${historyOpen ? " is-open" : ""}`} onClick={onToggleHistory}>

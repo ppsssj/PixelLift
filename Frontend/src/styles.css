@@ -69,6 +69,23 @@ select {
   text-transform: uppercase;
 }
 
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-lockup-intro {
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: block;
+  border-radius: 10px;
+}
+
 .workspace-home-button {
   padding: 0;
   border: 0;
@@ -150,9 +167,16 @@ select {
 }
 
 .intro-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  align-items: center;
+  gap: 48px;
   padding: 92px 0 108px;
-  text-align: center;
   background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.intro-hero-copy {
+  text-align: left;
 }
 
 .intro-kicker,
@@ -185,7 +209,7 @@ select {
 
 .intro-copy {
   max-width: 760px;
-  margin: 18px auto 0;
+  margin: 18px 0 0;
   color: var(--muted);
   font-size: 18px;
   line-height: 1.7;
@@ -193,10 +217,22 @@ select {
 
 .intro-actions {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-top: 34px;
   flex-wrap: wrap;
+}
+
+.intro-hero-art {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.intro-hero-mark {
+  width: min(100%, 360px);
+  height: auto;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.08));
 }
 
 .intro-secondary-button,
@@ -1155,6 +1191,16 @@ select {
     align-items: flex-start;
   }
 
+  .intro-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: left;
+  }
+
+  .intro-hero-art {
+    justify-content: flex-start;
+  }
+
   .intro-grid,
   .intro-detail-grid,
   .intro-benefits,
@@ -1194,6 +1240,10 @@ select {
 
   .intro-hero {
     padding: 72px 0 82px;
+  }
+
+  .intro-hero-mark {
+    width: min(100%, 240px);
   }
 
   .intro-grid {

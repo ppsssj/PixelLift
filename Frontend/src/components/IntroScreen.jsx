@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import logoMark from "../assets/pixellift-logo.svg";
 import showcaseInput from "../assets/showcase-input.jpg";
 import showcaseOutput from "../assets/showcase-output.jpg";
 
@@ -152,7 +153,10 @@ function IntroScreen({ isReady, models, onStart, status }) {
     <>
       <header className="intro-topbar">
         <div className="intro-topbar-inner">
-          <strong>pixellift</strong>
+          <div className="brand-lockup brand-lockup-intro">
+            <img src={logoMark} alt="" className="brand-mark" />
+            <strong>pixellift</strong>
+          </div>
           <nav>
             <a href="#intro-models">모델</a>
             <a href="#intro-benefits">특징</a>
@@ -170,18 +174,24 @@ function IntroScreen({ isReady, models, onStart, status }) {
 
       <main className="intro-shell">
         <section className="intro-hero">
-          <span className="intro-kicker">LOCAL UPSCALING WORKSPACE</span>
-          <h1>pixellift</h1>
-          <p className="intro-subtitle">로컬 Real-ESRGAN 이미지 업스케일링</p>
-          <p className="intro-copy">
-            pixellift는 로컬 하드웨어에서 직접 이미지를 업스케일링할 수 있도록 정리한 작업 공간입니다.
-            먼저 모델별 특성을 확인하고, 현재 PC 환경에 맞는 설정으로 자연스럽게 작업 화면으로 넘어갈 수 있습니다.
-          </p>
-          <div className="intro-actions">
-            <button type="button" className="intro-start-button" onClick={onStart} disabled={!isReady}>
-              {isReady ? "작업 공간 시작" : "모델 불러오는 중..."}
-            </button>
-            <button type="button" className="intro-secondary-button">사용 가이드</button>
+          <div className="intro-hero-copy">
+            <span className="intro-kicker">LOCAL UPSCALING WORKSPACE</span>
+            <h1>pixellift</h1>
+            <p className="intro-subtitle">로컬 Real-ESRGAN 이미지 업스케일링</p>
+            <p className="intro-copy">
+              pixellift는 로컬 하드웨어에서 직접 이미지를 업스케일링할 수 있도록 정리한 작업 공간입니다.
+              먼저 모델별 특성을 확인하고, 현재 PC 환경에 맞는 설정으로 자연스럽게 작업 화면으로 넘어갈 수 있습니다.
+            </p>
+            <div className="intro-actions">
+              <button type="button" className="intro-start-button" onClick={onStart} disabled={!isReady}>
+                {isReady ? "작업 공간 시작" : "모델 불러오는 중..."}
+              </button>
+              <button type="button" className="intro-secondary-button">사용 가이드</button>
+            </div>
+          </div>
+
+          <div className="intro-hero-art" aria-hidden="true">
+            <img src={logoMark} alt="" className="intro-hero-mark" />
           </div>
         </section>
 
