@@ -24,7 +24,7 @@ const MODEL_DETAILS = {
     tag: "보존형",
     summary: "자연스러운 질감과 구조 보존에 조금 더 초점을 둔 모델입니다.",
     description:
-      "복원 과정에서 과도한 sharpening을 줄이고 원본의 형태와 질감을 안정적으로 살리는 편입니다. 배경이나 세부 구조를 차분하게 유지하고 싶을 때 잘 맞습니다.",
+      "복원 과정에서 과도한 샤프닝을 줄이고 원본의 형태와 질감을 안정적으로 살리는 편입니다. 배경이나 세부 구조를 차분하게 유지하고 싶을 때 잘 맞습니다.",
     bestFor: "질감 유지, 구조 보존, 자연스러운 결과",
     caution: "장면에 따라 더 공격적인 선명화가 필요하면 다른 모델이 더 맞을 수 있습니다.",
   },
@@ -53,6 +53,36 @@ const MODEL_DETAILS = {
     caution: "일반 사진 단일 업로드에는 다른 범용 모델이 더 잘 맞는 경우가 많습니다.",
   },
 };
+
+const GUIDE_STEPS = [
+  {
+    label: "Step 1",
+    title: "이미지 업로드",
+    copy: "작업 화면에서 이미지를 클릭 업로드하거나 드래그 앤 드롭으로 넣습니다.",
+  },
+  {
+    label: "Step 2",
+    title: "모델과 옵션 선택",
+    copy: "사진이면 General x4 v3부터, 애니 이미지면 Anime x4 6B부터 시작하는 것을 권장합니다.",
+  },
+  {
+    label: "Step 3",
+    title: "업스케일 실행",
+    copy: "첫 요청은 모델 로드 때문에 조금 더 걸릴 수 있습니다. 처리 중에는 로딩 상태가 화면에 표시됩니다.",
+  },
+  {
+    label: "Step 4",
+    title: "결과 확인 및 다운로드",
+    copy: "원본과 업스케일 결과를 비교한 뒤, 원하는 결과를 바로 다운로드할 수 있습니다.",
+  },
+];
+
+const GUIDE_TIPS = [
+  "GPU가 없거나 느린 환경이라면 `General x4 v3`로 먼저 테스트하세요.",
+  "처리가 오래 걸리면 이미지 크기를 줄이거나 `tile` 값을 조정해보세요.",
+  "실사 사진과 애니 이미지는 적합한 모델이 다르니 모델 설명을 먼저 확인하세요.",
+  "작업 이력은 상단 `작업 공간` 메뉴에서 다시 불러올 수 있습니다.",
+];
 
 function IntroCard({ displayName, isActive, model, onSelect }) {
   const detail = MODEL_DETAILS[model.id] ?? {
@@ -112,6 +142,7 @@ function ModelDetailPanel({ displayName, modelId }) {
 
 function IntroScreen({ isReady, models, onStart, status }) {
   const detailRef = useRef(null);
+  const guideRef = useRef(null);
   const [selectedModelId, setSelectedModelId] = useState("realesr-general-x4v3");
 
   const modelMap = useMemo(
@@ -149,6 +180,13 @@ function IntroScreen({ isReady, models, onStart, status }) {
     });
   }
 
+  function handleScrollToGuide() {
+    guideRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
   return (
     <>
       <header className="intro-topbar">
@@ -159,7 +197,7 @@ function IntroScreen({ isReady, models, onStart, status }) {
           </div>
           <nav>
             <a href="#intro-models">모델</a>
-            <a href="#intro-benefits">특징</a>
+            <a href="#intro-guide">가이드</a>
             <a href="https://github.com/xinntao/Real-ESRGAN" rel="noreferrer" target="_blank">
               문서
             </a>
@@ -186,7 +224,9 @@ function IntroScreen({ isReady, models, onStart, status }) {
               <button type="button" className="intro-start-button" onClick={onStart} disabled={!isReady}>
                 {isReady ? "작업 공간 시작" : "모델 불러오는 중..."}
               </button>
-              <button type="button" className="intro-secondary-button">사용 가이드</button>
+              <button type="button" className="intro-secondary-button" onClick={handleScrollToGuide}>
+                사용 가이드
+              </button>
             </div>
           </div>
 
@@ -202,6 +242,38 @@ function IntroScreen({ isReady, models, onStart, status }) {
               ? status.message
               : "고성능 GPU가 없는 PC라면 먼저 `realesr-general-x4v3` 모델로 테스트하는 것을 권장합니다."}
           </p>
+        </section>
+
+        <section className="intro-guide" id="intro-guide" ref={guideRef}>
+          <div className="intro-section-head">
+            <div>
+              <h2>사용 가이드</h2>
+              <p>처음 사용하는 경우에도 바로 따라갈 수 있도록 가장 기본적인 흐름만 간단하게 정리했습니다.</p>
+            </div>
+            <span className="intro-chip">Quick Start</span>
+          </div>
+
+          <div className="intro-guide-grid">
+            <div className="intro-guide-steps">
+              {GUIDE_STEPS.map((step) => (
+                <article key={step.label} className="intro-guide-card">
+                  <span className="intro-guide-label">{step.label}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.copy}</p>
+                </article>
+              ))}
+            </div>
+
+            <aside className="intro-guide-panel">
+              <span className="intro-guide-label">Checklist</span>
+              <h3>빠르게 시작하려면</h3>
+              <ul className="intro-guide-list">
+                {GUIDE_TIPS.map((tip) => (
+                  <li key={tip}>{tip}</li>
+                ))}
+              </ul>
+            </aside>
+          </div>
         </section>
 
         <section className="intro-models" id="intro-models">
@@ -266,7 +338,7 @@ function IntroScreen({ isReady, models, onStart, status }) {
           <p>© 2026 Pixellift AI. Precision Upscaling.</p>
           <div>
             <a href="#intro-models">모델</a>
-            <a href="#intro-benefits">특징</a>
+            <a href="#intro-guide">가이드</a>
             <a href="https://github.com/xinntao/Real-ESRGAN" rel="noreferrer" target="_blank">
               GitHub
             </a>

@@ -50,7 +50,6 @@ select {
 
 .intro-topbar-inner,
 .workspace-header {
-  max-width: 1440px;
   margin: 0 auto;
   min-height: 64px;
   padding: 0 24px;
@@ -58,6 +57,15 @@ select {
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+}
+
+.intro-topbar-inner {
+  max-width: 1440px;
+}
+
+.workspace-header {
+  width: 100%;
+  max-width: none;
 }
 
 .intro-topbar strong,
@@ -298,6 +306,71 @@ select {
 
 .intro-models {
   padding: 72px 0 0;
+}
+
+.intro-guide {
+  padding: 72px 0 0;
+}
+
+.intro-guide-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
+  gap: 24px;
+}
+
+.intro-guide-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.intro-guide-card,
+.intro-guide-panel {
+  padding: 28px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.intro-guide-card h3,
+.intro-guide-panel h3 {
+  margin: 12px 0 10px;
+  font-family: "Manrope", "Noto Sans KR", sans-serif;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+
+.intro-guide-card p,
+.intro-guide-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.intro-guide-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #f1f2f3;
+  color: #61676b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.intro-guide-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.intro-guide-list li {
+  margin-bottom: 12px;
+  line-height: 1.7;
 }
 
 .intro-section-head {
@@ -1202,6 +1275,8 @@ select {
   }
 
   .intro-grid,
+  .intro-guide-grid,
+  .intro-guide-steps,
   .intro-detail-grid,
   .intro-benefits,
   .workspace {
